@@ -1,0 +1,392 @@
+/* Modern Login Page Styling */
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  /* body {
+    background-color: var(--background);
+    color: var(--text-primary);
+  } */
+  
+  /* Main Login Container */
+  .loginbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #57646d 100%);
+  }
+  
+  /* Login Form Card */
+  .loginbox1 {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 450px;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .loginbox1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), #818cf8);
+  }
+  
+  .loginh1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: -0.025em;
+  }
+  
+  /* Input Fields */
+  .logininput {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    color: var(--text-primary);
+    transition: var(--transition);
+  }
+  
+  .logininput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    background-color: var(--card-bg);
+  }
+  
+  .logininput::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  /* Password Container */
+  .password-container {
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Show Password and Forgot Password Row */
+  .login-show {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-show-password {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .login-show-password input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+  }
+  
+  .forgotpasswordlink {
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .forgotpasswordlink:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
+  
+  /* Login Button */
+  .loginbutton {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loginbutton:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .loginbutton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Login Message Feedback */
+  .loginmessage {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .loginmessage.success {
+    color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+  
+  .loginmessage.error {
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+  
+  /* Sign Up Link */
+  .signup-link {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  
+  .signup-link a {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  
+  .signup-link a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
+  
+  /* Password Reset Modal */
+  .reset-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .reset-modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .reset-modal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  
+  .reset-email-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    color: var(--text-primary);
+    transition: var(--transition);
+  }
+  
+  .reset-email-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    background-color: var(--card-bg);
+  }
+  
+  .reset-button, .cancel-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 0.75rem;
+  }
+  
+  .reset-button {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  .reset-button:hover:not(:disabled) {
+    background: var(--primary-hover);
+  }
+  
+  .cancel-button {
+    background: #f1f5f9;
+    color: var(--text-primary);
+  }
+  
+  .cancel-button:hover:not(:disabled) {
+    background: #e2e8f0;
+  }
+  
+  .reset-button:disabled, .cancel-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Loading State */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    background-color: var(--background);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* === Responsive Design === */
+  
+  /* Tablet View */
+  @media screen and (max-width: 768px) {
+    .loginbox1 {
+      padding: 2.5rem;
+      max-width: 400px;
+    }
+    
+    .loginh1 {
+      font-size: 1.75rem;
+    }
+  }
+  
+  /* Mobile View */
+  @media screen and (max-width: 480px) {
+    .loginbox {
+      padding: 1rem;
+    }
+    
+    .loginbox1 {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+    
+    .loginh1 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .logininput {
+      padding: 0.75rem;
+      font-size: 0.875rem;
+    }
+    
+    .login-show {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0.75rem;
+      width: 100%;
+      font-size: 10px;
+    }
+    
+    .forgotpasswordlink {
+      margin-left: 0;
+    }
+    
+    .loginbutton {
+      padding: 0.675rem;
+    }
+    
+    .reset-modal-content {
+      padding: 1.5rem;
+    }
+    .signup-link{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }

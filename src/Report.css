@@ -1,0 +1,413 @@
+/* Report.css - Modern design for agricultural sensor data display */
+
+/* Base styles and variables */
+:root {
+  --primary-color: #2e7d32;
+  --primary-light: #60ad5e;
+  --primary-dark: #005005;
+  --accent-color: #ffeb3b;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --background-light: #f5f5f5;
+  --background-medium: #e0e0e0;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+  --navbar-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}
+
+/* Main container */
+.report-containerreport {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: var(--navbar-height);
+  position: relative;
+}
+
+
+
+/* Navigation Bar */
+.navbarreport {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00701a;
+  color: var(--text-light);
+  padding: 15px 20px;
+  /* border-radius: var(--border-radius); */
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* Hide navbar when scrolled */
+.navbar-hiddenreport {
+  transform: translateY(-100%);
+}
+
+.navbar-titlereport {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-listreport {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar-itemreport {
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+  transition: var(--transition);
+}
+
+.navbar-itemreport:hover {
+  color: var(--accent-color);
+}
+
+.navbar-itemreport::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.navbar-itemreport:hover::after {
+  width: 100%;
+}
+
+.language-selectorreport select,
+.language-selectreport {
+  background-color: black;
+  color: var(--text-light);
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+  transition: var(--transition);
+}
+
+.language-selectreport:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Report Header */
+.report-header-fixedreport {
+  background-color: var(--background-light);
+  padding: 15px 0;
+  margin-bottom: 20px;
+}
+
+.report-titlereport {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Table container */
+.report-table-containerreport {
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+/* Table Styles with fixed header */
+.report-tablereport {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+}
+
+.table-headreport {
+  background-color: black;
+  color: var(--text-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table-headerreport {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.table-cellreport {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--background-medium);
+}
+
+.table-bodyreport {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.table-rowreport {
+  transition: var(--transition);
+}
+
+.table-rowreport:hover {
+  background-color: var(--background-light);
+}
+
+.table-rowreport:last-child .table-cellreport {
+  border-bottom: none;
+}
+
+/* User controls */
+.user-controlsreport {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-buttonreport {
+  background-color: var(--primary-light);
+  color: var(--text-light);
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.logout-buttonreport:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Logout confirmation dialog */
+.logout-confirm-overlayreport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.logout-confirm-dialogreport {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow);
+}
+
+.logout-dialog-titlereport {
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.logout-confirm-buttonsreport {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.confirm-logout-btnreport, 
+.cancel-logout-btnreport {
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.confirm-logout-btnreport {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-logout-btnreport {
+  background-color: var(--background-medium);
+  color: var(--text-dark);
+}
+
+.confirm-logout-btnreport:hover {
+  background-color: #d32f2f;
+}
+
+.cancel-logout-btnreport:hover {
+  background-color: #bdbdbd;
+}
+
+/* Table wrapper for scrolling with fixed header */
+.table-wrapperreport {
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: var(--border-radius);
+  background-color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbarreport {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .navbar-listreport {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .report-tablereport {
+    font-size: 0.9rem;
+  }
+  
+  .table-headerreport, 
+  .table-cellreport {
+    padding: 10px;
+  }
+  
+  .report-header-fixedreport {
+    padding: 10px 0;
+  }
+  
+  .report-titlereport {
+    font-size: 1.5rem;
+  }
+  
+  .table-wrapperreport {
+    max-height: 60vh;
+  }
+}
+
+/* Status indicators for sensor values */
+.temperature-cellreport,
+.humidity-cellreport,
+.moisture-cellreport {
+  position: relative;
+}
+
+.temperature-cellreport::before,
+.humidity-cellreport::before,
+.moisture-cellreport::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Temperature indicators */
+.temperature-cellreport::before {
+  background-color: #ff5722;  /* hot */
+}
+
+.temperature-cellreport[data-value^="2"]::before {
+  background-color: #4caf50;  /* normal */
+}
+
+.temperature-cellreport[data-value^="1"]::before {
+  background-color: #2196f3;  /* cool */
+}
+
+/* Humidity indicators */
+.humidity-cellreport::before {
+  background-color: #2196f3;  /* humid */
+}
+
+.humidity-cellreport[data-value^="3"]::before,
+.humidity-cellreport[data-value^="4"]::before {
+  background-color: #4caf50;  /* normal humidity */
+}
+
+.humidity-cellreport[data-value^="2"]::before,
+.humidity-cellreport[data-value^="1"]::before {
+  background-color: #ff9800;  /* dry */
+}
+
+/* Soil moisture indicators */
+.moisture-cellreport::before {
+  background-color: #795548;  /* wet soil */
+}
+
+.moisture-cellreport[data-value="medium"]::before {
+  background-color: #4caf50;  /* normal moisture */
+}
+
+.moisture-cellreport[data-value="dry"]::before {
+  background-color: #ff9800;  /* dry soil */
+}
+
+/* Empty state styling */
+.empty-messagereport {
+  text-align: center;
+  padding: 30px;
+  color: #757575;
+  font-style: italic;
+}
+
+/* Animation for new data rows */
+@keyframes newData {
+  from { background-color: rgba(76, 175, 80, 0.2); }
+  to { background-color: transparent; }
+}
+
+.new-data-rowreport {
+  animation: newData 2s ease-out;
+}
+
+/* Additional styling for user info section */
+.user-inforeport {
+  display: flex;
+  align-items: center;
+}
+
+/* Logout dialog message styling */
+.logout-dialog-messagereport {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}

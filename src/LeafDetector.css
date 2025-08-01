@@ -1,0 +1,595 @@
+/* LeafDetector.css */
+.leaf-detector-containerleaf {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.leaf-detector-containerleaf.darkleaf {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+.headerleaf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.titleleaf {
+  font-size: 2.5rem;
+  color: #2e7d32;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
+.titleleaf::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #2e7d32, #81c784);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.darkleaf .titleleaf {
+  color: #81c784;
+}
+
+.dark-mode-toggleleaf {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.darkleaf .dark-mode-toggleleaf {
+  border-color: #81c784;
+  color: #81c784;
+}
+
+.dark-mode-toggleleaf:hover {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.darkleaf .dark-mode-toggleleaf:hover {
+  background-color: #81c784;
+  color: #1a1a1a;
+}
+
+.upload-sectionleaf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.file-input-containerleaf {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.file-inputleaf {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-input-labelleaf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f7ed;
+  border: 2px dashed #2e7d32;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #2e7d32;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.darkleaf .file-input-labelleaf {
+  background-color: #2a2a2a;
+  border-color: #81c784;
+  color: #81c784;
+}
+
+.file-input-labelleaf:hover {
+  background-color: #e8f5e9;
+}
+
+.darkleaf .file-input-labelleaf:hover {
+  background-color: #333;
+}
+
+.image-previewleaf {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #2e7d32;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.darkleaf .image-previewleaf {
+  border-color: #81c784;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.image-previewleaf:hover {
+  transform: scale(1.02);
+}
+
+.preview-imgleaf {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.predict-buttonleaf {
+  background: linear-gradient(45deg, #2e7d32, #4caf50);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.darkleaf .predict-buttonleaf {
+  background: linear-gradient(45deg, #4caf50, #81c784);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.predict-buttonleaf:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.predict-buttonleaf:active {
+  transform: translateY(1px);
+}
+
+.error-messageleaf {
+  color: #f44336;
+  font-weight: 500;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(244, 67, 54, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.darkleaf .error-messageleaf {
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+.prediction-resultleaf {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 25px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease;
+  border-left: 5px solid #2e7d32;
+}
+
+.darkleaf .prediction-resultleaf {
+  background-color: #2a2a2a;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-left: 5px solid #81c784;
+}
+
+.prediction-headerleaf {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+.darkleaf .prediction-headerleaf {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prediction-iconleaf {
+  font-size: 2rem;
+  margin-right: 15px;
+  color: #2e7d32;
+}
+
+.darkleaf .prediction-iconleaf {
+  color: #81c784;
+}
+
+.disease-nameleaf {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  margin: 0;
+}
+
+.darkleaf .disease-nameleaf {
+  color: #81c784;
+}
+
+.prediction-sectionleaf {
+  margin-top: 15px;
+}
+
+.section-titleleaf {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.darkleaf .section-titleleaf {
+  color: #e0e0e0;
+}
+
+.section-contentleaf {
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.darkleaf .section-contentleaf {
+  color: #b0b0b0;
+}
+
+.solution-sectionleaf {
+  background-color: rgba(46, 125, 50, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.darkleaf .solution-sectionleaf {
+  background-color: rgba(129, 199, 132, 0.1);
+}
+
+.navbarleaf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.darkleaf .navbarleaf {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-titleleaf {
+  color: #2e7d32;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.darkleaf .nav-titleleaf {
+  color: #81c784;
+}
+
+.nav-linksleaf {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link-itemleaf {
+  margin: 0 15px;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+}
+
+.nav-link-itemleaf::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2e7d32;
+  transition: width 0.3s ease;
+}
+
+.darkleaf .nav-link-itemleaf::after {
+  background-color: #81c784;
+}
+
+.nav-link-itemleaf:hover::after {
+  width: 100%;
+}
+
+.language-selectorleaf {
+  position: relative;
+}
+
+.language-selectleaf {
+  appearance: none;
+  padding: 8px 30px 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.darkleaf .language-selectleaf {
+  background-color: #333;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+.language-selectleaf:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+.darkleaf .language-selectleaf:focus {
+  border-color: #81c784;
+  box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2);
+}
+
+.language-selectorleaf::after {
+  content: '▼';
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.darkleaf .language-selectorleaf::after {
+  color: #b0b0b0;
+}
+
+/* Logout button and confirmation dialog styles */
+.user-controlsleaf {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-buttonleaf {
+  background-color: transparent;
+  border: 2px solid #e53935;
+  color: #e53935;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-buttonleaf:hover {
+  background-color: #e53935;
+  color: white;
+}
+
+.darkleaf .logout-buttonleaf {
+  border-color: #ff5252;
+  color: #ff5252;
+}
+
+.darkleaf .logout-buttonleaf:hover {
+  background-color: #ff5252;
+  color: #1a1a1a;
+}
+
+.logout-confirm-overlayleaf {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logout-confirm-dialogleaf {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.darkleaf .logout-confirm-dialogleaf {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.logout-dialog-titleleaf {
+  color: #2e7d32;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.darkleaf .logout-dialog-titleleaf {
+  color: #81c784;
+}
+
+.logout-dialog-messageleaf {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.darkleaf .logout-dialog-messageleaf {
+  color: #b0b0b0;
+}
+
+.logout-confirm-buttonsleaf {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.confirm-logout-btnleaf {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.confirm-logout-btnleaf:hover {
+  background-color: #c62828;
+}
+
+.cancel-logout-btnleaf {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.cancel-logout-btnleaf:hover {
+  background-color: #bdbdbd;
+}
+
+.darkleaf .cancel-logout-btnleaf {
+  background-color: #424242;
+  color: #e0e0e0;
+}
+
+.darkleaf .cancel-logout-btnleaf:hover {
+  background-color: #616161;
+}
+
+.user-infoleaf {
+  display: flex;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leaf-detector-containerleaf {
+    padding: 15px;
+  }
+  
+  .titleleaf {
+    font-size: 2rem;
+  }
+  
+  .prediction-resultleaf {
+    padding: 20px;
+  }
+  
+  .navbarleaf {
+    flex-direction: column;
+  }
+  
+  .nav-linksleaf {
+    margin-top: 15px;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .nav-link-itemleaf {
+    margin: 0 5px;
+    font-size: 0.9rem;
+  }
+  
+  .language-selectorleaf {
+    margin-top: 15px;
+  }
+  
+  .user-controlsleaf {
+    margin-top: 15px;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .logout-confirm-dialogleaf {
+    width: 85%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-previewleaf {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .file-input-containerleaf {
+    width: 250px;
+  }
+  
+  .nav-linksleaf {
+    flex-wrap: wrap;
+  }
+  
+  .nav-link-itemleaf {
+    margin: 5px;
+  }
+  
+  .logout-confirm-buttonsleaf {
+    flex-direction: column;
+  }
+}
