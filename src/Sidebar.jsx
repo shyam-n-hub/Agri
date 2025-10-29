@@ -41,16 +41,16 @@ const Sidebar = ({ darkMode, handleLanguageChange }) => {
           <span>{t('ai')}</span>
         </div>
         
-        <div 
+        {/* <div 
           className={`nav-item- ${currentPath === '/leaf-detector' ? 'active-' : ''}`}
           onClick={() => navigate('/leaf-detector')}
         >
           <span role="img" aria-label="Leaf">🍃</span>
           <span>{t('leafDetector')}</span>
-        </div>
+        </div> */}
       </div>
       
-      <div className="language-selector-">
+      {/* <div className="language-selector-">
         <select 
           className="language-select-" 
           onChange={handleLanguageChange}
@@ -61,7 +61,7 @@ const Sidebar = ({ darkMode, handleLanguageChange }) => {
           <option value="ta">தமிழ்</option>
           <option value="hi">हिन्दी</option>
         </select>
-      </div>
+      </div> */}
     </div>
   );
 };

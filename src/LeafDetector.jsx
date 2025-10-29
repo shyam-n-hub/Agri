@@ -107,16 +107,16 @@ const LeafDetector = () => {
           <li className="navbar-itemreport" onClick={() => navigate('/')}>{t('dashboard')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('reports')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('ai')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/leaf-detector')}>{t('leafDetector')}</li>
+          {/* <li className="navbar-itemreport" onClick={() => navigate('/leaf-detector')}>{t('leafDetector')}</li> */}
         </ul>
         <div className="user-controlsreport">
-          <div className="language-selectorreport">
+          {/* <div className="language-selectorreport">
             <select className="language-selectreport" onChange={handleLanguageChange} defaultValue={i18n.language}>
               <option value="en">English</option>
               <option value="ta">தமிழ்</option>
               <option value="hi">हिन्दी</option>
             </select>
-          </div>
+          </div> */}
           {/* <div className="user-infoleaf">
             <button onClick={handleLogoutClick} className="logout-buttonleaf">
               {t('logout') || 'Logout'}

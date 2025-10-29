@@ -6,6 +6,9 @@ import './Report.css';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './i18n';
+import * as XLSX from 'xlsx';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -25,6 +28,7 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 const Report = ({ onLogout }) => {
+  const [currentData, setCurrentData] = useState(null);
   const [history, setHistory] = useState([]);
   const [userEmail, setUserEmail] = useState("");
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -60,7 +64,6 @@ const Report = ({ onLogout }) => {
   };
 
   const handleLogoutClick = () => {
-    // Show the confirmation dialog when logout button is clicked
     setShowLogoutConfirm(true);
   };
   
@@ -68,7 +71,6 @@ const Report = ({ onLogout }) => {
     try {
       await signOut(auth);
       
-      // Clear all local storage items related to auth
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('uid');
       localStorage.removeItem('userData');
@@ -76,12 +78,10 @@ const Report = ({ onLogout }) => {
       localStorage.removeItem('firebaseAuthUser');
       localStorage.removeItem('userEmail');
       
-      // Call the onLogout prop if it exists
       if (onLogout) {
         onLogout();
       }
       
-      // Navigate to login page
       navigate('/login');
     } catch (error) {
       console.error("Error signing out:", error);
@@ -92,16 +92,141 @@ const Report = ({ onLogout }) => {
     setShowLogoutConfirm(false);
   };
 
+  // Listen to real-time current data
+  useEffect(() => {
+    const sensorRef = ref(database, 'SensorData/');
+    const unsubscribe = onValue(sensorRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const newData = snapshot.val();
+        setCurrentData({
+          temperature: newData.temperature,
+          humidity: newData.humidity,
+          soilPercent: newData.soilPercent || 0, // Changed from soilMoisture to soilPercent
+          timestamp: Date.now(),
+          date: new Date().toLocaleDateString(),
+          time: new Date().toLocaleTimeString()
+        });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Listen to historical data
   useEffect(() => {
     const historyRef = ref(database, 'sensorHistory/');
     onValue(historyRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const allEntries = Object.values(data).sort((a, b) => a.timestamp - b.timestamp); // Sort by time ascending
+        const allEntries = Object.values(data)
+          .map(item => ({
+            ...item,
+            soilPercent: item.soilPercent || 0, // Ensure soilPercent is used
+            date: new Date(item.timestamp).toLocaleDateString(),
+            time: new Date(item.timestamp).toLocaleTimeString()
+          }))
+          .sort((a, b) => b.timestamp - a.timestamp);
         setHistory(allEntries);
       }
     });
   }, []);
+
+  // Export to Excel
+  const exportToExcel = () => {
+    const dataToExport = [];
+    
+    // Add current data as first row
+    if (currentData) {
+      dataToExport.push({
+        Date: currentData.date,
+        Time: currentData.time,
+        'Temperature (°C)': currentData.temperature,
+        'Humidity (%)': currentData.humidity,
+        'Soil Moisture (%)': currentData.soilPercent, // Changed label
+        Status: 'Current'
+      });
+    }
+
+    // Add historical data
+    history.forEach(item => {
+      dataToExport.push({
+        Date: item.date,
+        Time: item.time,
+        'Temperature (°C)': item.temperature,
+        'Humidity (%)': item.humidity,
+        'Soil Moisture (%)': item.soilPercent, // Changed to soilPercent
+        Status: 'Historical'
+      });
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sensor Data');
+    
+    // Set column widths
+    worksheet['!cols'] = [
+      { wch: 12 },
+      { wch: 12 },
+      { wch: 18 },
+      { wch: 15 },
+      { wch: 18 }, // Increased width for percentage
+      { wch: 12 }
+    ];
+
+    XLSX.writeFile(workbook, `Sensor_Report_${new Date().toLocaleDateString().replace(/\//g, '-')}.xlsx`);
+  };
+
+  // Export to PDF
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    
+    // Add title
+    doc.setFontSize(18);
+    doc.text('Agricultural Sensor Data Report', 14, 22);
+    
+    doc.setFontSize(11);
+    doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 32);
+    
+    // Prepare table data
+    const tableData = [];
+    
+    // Add current data as first row
+    if (currentData) {
+      tableData.push([
+        currentData.date,
+        currentData.time,
+        currentData.temperature,
+        currentData.humidity,
+        currentData.soilPercent, // Changed to soilPercent
+        'Current'
+      ]);
+    }
+
+    // Add historical data
+    history.forEach(item => {
+      tableData.push([
+        item.date,
+        item.time,
+        item.temperature,
+        item.humidity,
+        item.soilPercent, // Changed to soilPercent
+        'Historical'
+      ]);
+    });
+
+    // Add table using autoTable
+    autoTable(doc, {
+      head: [['Date', 'Time', 'Temp (°C)', 'Humidity (%)', 'Soil Moisture (%)', 'Status']], // Added % to header
+      body: tableData,
+      startY: 40,
+      styles: { fontSize: 9 },
+      headStyles: { fillColor: [67, 160, 71] },
+      alternateRowStyles: { fillColor: [240, 240, 240] },
+      margin: { top: 40 }
+    });
+
+    doc.save(`Sensor_Report_${new Date().toLocaleDateString().replace(/\//g, '-')}.pdf`);
+  };
 
   return (
     <div className="report-containerreport">
@@ -111,9 +236,9 @@ const Report = ({ onLogout }) => {
           <li className="navbar-itemreport" onClick={() => navigate('/')}>{t('dashboard')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('reports')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('ai')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/leaf-detector')}>{t('leafDetector')}</li>
+          {/* <li className="navbar-itemreport" onClick={() => navigate('/leaf-detector')}>{t('leafDetector')}</li> */}
         </ul>
-        <div className="user-controlsreport">
+        {/* <div className="user-controlsreport">
           <div className="language-selectorreport">
             <select className="language-selectreport" onChange={handleLanguageChange} defaultValue={i18n.language}>
               <option value="en">English</option>
@@ -121,8 +246,7 @@ const Report = ({ onLogout }) => {
               <option value="hi">हिन्दी</option>
             </select>
           </div>
-          
-        </div>
+        </div> */}
       </nav>
 
       {showLogoutConfirm && (
@@ -150,6 +274,38 @@ const Report = ({ onLogout }) => {
 
       <div className="report-header-fixedreport">
         <h2 className="report-titlereport">📊 {t('sensorData')} ({t('fullHistory') || 'Full History'})</h2>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+          <button 
+            onClick={exportToExcel}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#43a047',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }}
+          >
+            📥 Export to Excel
+          </button>
+          <button 
+            onClick={exportToPDF}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#fb8c00',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }}
+          >
+            📄 Export to PDF
+          </button>
+        </div>
       </div>
       
       <div className="report-table-containerreport">
@@ -157,26 +313,44 @@ const Report = ({ onLogout }) => {
           <table className="report-tablereport">
             <thead className="table-headreport">
               <tr className="table-headerrowreport">
+                <th className="table-headerreport">{t('date') || 'Date'}</th>
                 <th className="table-headerreport">{t('time')}</th>
                 <th className="table-headerreport">{t('temperature')} (°C)</th>
                 <th className="table-headerreport">{t('humidity')} (%)</th>
-                <th className="table-headerreport">{t('soilMoisture')}</th>
+                <th className="table-headerreport">{t('soilMoisture')} (%)</th>
+                <th className="table-headerreport">Status</th>
               </tr>
             </thead>
             <tbody className="table-bodyreport">
+              {currentData && (
+                <tr className="table-rowreport" style={{ backgroundColor: '#e8f5e9', fontWeight: 'bold' }}>
+                  <td className="table-cellreport">{currentData.date}</td>
+                  <td className="table-cellreport">{currentData.time}</td>
+                  <td className="table-cellreport temperature-cellreport">{currentData.temperature}</td>
+                  <td className="table-cellreport humidity-cellreport">{currentData.humidity}</td>
+                  <td className="table-cellreport moisture-cellreport">{currentData.soilPercent}%</td>
+                  <td className="table-cellreport" style={{ color: '#43a047', fontWeight: 'bold' }}>
+                    🔴 Live
+                  </td>
+                </tr>
+              )}
               {history.length > 0 ? (
                 history.map((item, idx) => (
                   <tr key={idx} className="table-rowreport">
-                    <td className="table-cellreport">{new Date(item.timestamp).toLocaleTimeString()}</td>
+                    <td className="table-cellreport">{item.date}</td>
+                    <td className="table-cellreport">{item.time}</td>
                     <td className="table-cellreport temperature-cellreport">{item.temperature}</td>
                     <td className="table-cellreport humidity-cellreport">{item.humidity}</td>
-                    <td className="table-cellreport moisture-cellreport">{item.soilMoisture}</td>
+                    <td className="table-cellreport moisture-cellreport">{item.soilPercent}%</td>
+                    <td className="table-cellreport" style={{ color: '#757575' }}>Historical</td>
                   </tr>
                 ))
               ) : (
-                <tr className="empty-rowreport">
-                  <td colSpan="4" className="empty-messagereport">No data available</td>
-                </tr>
+                !currentData && (
+                  <tr className="empty-rowreport">
+                    <td colSpan="6" className="empty-messagereport">No data available</td>
+                  </tr>
+                )
               )}
             </tbody>
           </table>
