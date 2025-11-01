@@ -246,7 +246,7 @@ const AiRecommendation = ({ onLogout }) => {
       </button>
 
       <nav className="navbarreport">
-        <h2 className="navbar-titlereport">🌿 {t("navTitle") || "Agri Assist"}</h2>
+        <h2 className="navbar-titlereport">🌿 { "Agri Assist"}</h2>
         <ul className="navbar-listreport">
           <li className="navbar-itemreport" onClick={() => navigate("/")}>
             {t("Sensor_Dashboard")}

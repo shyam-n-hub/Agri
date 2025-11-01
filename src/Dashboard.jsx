@@ -132,8 +132,8 @@ const Dashboard = ({ onLogout }) => {
         setHistory(prev => [...prev.slice(-9), entry]);
 
         // Notifications - using soilPercent instead of soilMoisture
-        if (newData.temperature > 35) setNotification(t('temperatureHighWarning'));
-        else if ((newData.soilPercent || 0) < 30) setNotification(t('soilDryWarning'));
+        if (newData.temperature > 35) setNotification(t('Temperature_High_Warning'));
+        else if ((newData.soilPercent || 0) < 30) setNotification(t('Soil_Dry_Warning'));
         else setNotification("");
       }
     });
@@ -179,14 +179,14 @@ const Dashboard = ({ onLogout }) => {
       </button>
 
       <nav className="navbarreport">
-        <h2 className="navbar-titlereport">🌿 {t('navTitle')}</h2>
+        <h2 className="navbar-titlereport">🌿 {t('Agri Assist')}</h2>
         <ul className="navbar-listreport">
           <li className="navbar-itemreport">{t('Sensor_Dashboard')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('Sensor_Reports')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('Crop_Recommendations')}</li>
           <li className="navbar-itemreport">
-            <button onClick={handleLogoutClick} className="logout-button" disabled={isLoggingOut}>
-              {isLoggingOut ? t('loggingOut') || 'Logging out...' : t('logout') || 'Logout'}
+            <button onClick={handleLogoutClick} className="logout-button" disabled={isLoggingOut} style={{padding:"5px",background:"white", color:"black",fontSize:"15px"}}>
+              {isLoggingOut ? 'Logging out...' :  'Logout'}
             </button>
           </li>
         </ul>
@@ -195,29 +195,29 @@ const Dashboard = ({ onLogout }) => {
       {showLogoutConfirm && (
         <div className="logout-confirm-overlay">
           <div className="logout-confirm-dialog">
-            <h3>{t('confirmLogout') || 'Confirm Logout'}</h3>
-            <p>{t('logoutConfirmMessage') || 'Are you sure you want to logout?'}</p>
+            <h3>{'Confirm Logout'}</h3>
+            <p>{'Are you sure you want to logout?'}</p>
             <div className="logout-confirm-buttons">
               <button 
                 onClick={handleConfirmLogout} 
                 className="confirm-yes"
                 disabled={isLoggingOut}
               >
-                {isLoggingOut ? t('loggingOut') || 'Logging out...' : t('yesLogout') || 'Yes, Logout'}
+                {isLoggingOut ? t('loggingOut') || 'Logging out...' : 'Yes, Logout'}
               </button>
               <button 
                 onClick={handleCancelLogout} 
                 className="confirm-no"
                 disabled={isLoggingOut}
               >
-                {t('cancel') || 'Cancel'}
+                Cancel
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <h1 className="dashboard-title-">🌾 {t('title')}</h1>
+      <h1 className="dashboard-title-">🌾 {t('Sensor Readings')}</h1>
       {notification && <div className="notification-">{notification}</div>}
 
       <div className="card-grid-">

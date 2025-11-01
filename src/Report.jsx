@@ -231,7 +231,7 @@ const Report = ({ onLogout }) => {
   return (
     <div className="report-containerreport">
       <nav className={`navbarreport ${isScrolled ? 'navbar-hiddenreport' : ''}`}>
-        <h2 className="navbar-titlereport">🌿 {t('navTitle')}</h2>
+        <h2 className="navbar-titlereport">🌿 {t('Agri Assist')}</h2>
         <ul className="navbar-listreport">
           <li className="navbar-itemreport" onClick={() => navigate('/')}>{t('Sensor_Dashboard')}</li>
           <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('Sensor_Reports')}</li>
@@ -273,7 +273,7 @@ const Report = ({ onLogout }) => {
       )}
 
       <div className="report-header-fixedreport">
-        <h2 className="report-titlereport">📊 {t('sensorData')} ({t('fullHistory') || 'Full History'})</h2>
+        <h2 className="report-titlereport">📊 {t('Sensor_Full_History')} </h2>
         <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
           <button 
             onClick={exportToExcel}
@@ -313,11 +313,11 @@ const Report = ({ onLogout }) => {
           <table className="report-tablereport">
             <thead className="table-headreport">
               <tr className="table-headerrowreport">
-                <th className="table-headerreport">{t('date') || 'Date'}</th>
-                <th className="table-headerreport">{t('time')}</th>
-                <th className="table-headerreport">{t('temperature')} (°C)</th>
-                <th className="table-headerreport">{t('humidity')} (%)</th>
-                <th className="table-headerreport">{t('soilMoisture')} (%)</th>
+                <th className="table-headerreport">{t('Date') || 'Date'}</th>
+                <th className="table-headerreport">{t('Time')}</th>
+                <th className="table-headerreport">{t('Temperature')} (°C)</th>
+                <th className="table-headerreport">{t('Humidity')} (%)</th>
+                <th className="table-headerreport">{t('SoilMoisture')} (%)</th>
                 <th className="table-headerreport">Status</th>
               </tr>
             </thead>
