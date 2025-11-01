@@ -233,9 +233,9 @@ const Report = ({ onLogout }) => {
       <nav className={`navbarreport ${isScrolled ? 'navbar-hiddenreport' : ''}`}>
         <h2 className="navbar-titlereport">🌿 {t('navTitle')}</h2>
         <ul className="navbar-listreport">
-          <li className="navbar-itemreport" onClick={() => navigate('/')}>{t('dashboard')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('reports')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('ai')}</li>
+          <li className="navbar-itemreport" onClick={() => navigate('/')}>{t('Sensor_Dashboard')}</li>
+          <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('Sensor_Reports')}</li>
+          <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('Crop_Recommendations')}</li>
           {/* <li className="navbar-itemreport" onClick={() => navigate('/leaf-detector')}>{t('leafDetector')}</li> */}
         </ul>
         {/* <div className="user-controlsreport">

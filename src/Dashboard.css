@@ -232,15 +232,15 @@
 }
 
 .temperature-::before {
-  background-color: var(--temp-color);
+  background-color: red;
 }
 
 .humidity-::before {
-  background-color: var(--secondary-color);
+  background-color: blue;
 }
 
 .soil-moisture-::before {
-  background-color: var(--primary-color);
+  background-color: green;
 }
 
 .label- {

@@ -343,43 +343,43 @@ body {
 
 /* Temperature indicators */
 .temperature-cellreport::before {
-  background-color: #ff5722;  /* hot */
+  background-color: red;  /* hot */
 }
 
 .temperature-cellreport[data-value^="2"]::before {
-  background-color: #4caf50;  /* normal */
+  background-color: red;  /* normal */
 }
 
 .temperature-cellreport[data-value^="1"]::before {
-  background-color: #2196f3;  /* cool */
+  background-color: blue;  /* cool */
 }
 
 /* Humidity indicators */
 .humidity-cellreport::before {
-  background-color: #2196f3;  /* humid */
+  background-color: blue;  /* humid */
 }
 
 .humidity-cellreport[data-value^="3"]::before,
 .humidity-cellreport[data-value^="4"]::before {
-  background-color: #4caf50;  /* normal humidity */
+  background-color: blue;  /* normal humidity */
 }
 
 .humidity-cellreport[data-value^="2"]::before,
 .humidity-cellreport[data-value^="1"]::before {
-  background-color: #ff9800;  /* dry */
+  background-color: blue;  /* dry */
 }
 
 /* Soil moisture indicators */
 .moisture-cellreport::before {
-  background-color: #795548;  /* wet soil */
+  background-color: green;  /* wet soil */
 }
 
 .moisture-cellreport[data-value="medium"]::before {
-  background-color: #4caf50;  /* normal moisture */
+  background-color: green;  /* normal moisture */
 }
 
 .moisture-cellreport[data-value="dry"]::before {
-  background-color: #ff9800;  /* dry soil */
+  background-color: green;  /* dry soil */
 }
 
 /* Empty state styling */

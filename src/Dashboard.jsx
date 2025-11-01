@@ -181,9 +181,9 @@ const Dashboard = ({ onLogout }) => {
       <nav className="navbarreport">
         <h2 className="navbar-titlereport">🌿 {t('navTitle')}</h2>
         <ul className="navbar-listreport">
-          <li className="navbar-itemreport">{t('dashboard')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('reports')}</li>
-          <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('ai')}</li>
+          <li className="navbar-itemreport">{t('Sensor_Dashboard')}</li>
+          <li className="navbar-itemreport" onClick={() => navigate('/report')}>{t('Sensor_Reports')}</li>
+          <li className="navbar-itemreport" onClick={() => navigate('/airecommendation')}>{t('Crop_Recommendations')}</li>
           <li className="navbar-itemreport">
             <button onClick={handleLogoutClick} className="logout-button" disabled={isLoggingOut}>
               {isLoggingOut ? t('loggingOut') || 'Logging out...' : t('logout') || 'Logout'}
@@ -244,9 +244,9 @@ const Dashboard = ({ onLogout }) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="temperature" stroke="#fb8c00" name={t('temperature')} />
-            <Line type="monotone" dataKey="humidity" stroke="#1e88e5" name={t('humidity')} />
-            <Line type="monotone" dataKey="soilPercent" stroke="#43a047" name={t('soilMoisture')} />
+            <Line type="monotone" dataKey="temperature" stroke="red" name={t('temperature')} />
+            <Line type="monotone" dataKey="humidity" stroke="blue" name={t('humidity')} />
+            <Line type="monotone" dataKey="soilPercent" stroke="green" name={t('soilMoisture')} />
           </LineChart>
         </ResponsiveContainer>
       </div>

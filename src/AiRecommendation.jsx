@@ -249,13 +249,13 @@ const AiRecommendation = ({ onLogout }) => {
         <h2 className="navbar-titlereport">🌿 {t("navTitle") || "Agri Assist"}</h2>
         <ul className="navbar-listreport">
           <li className="navbar-itemreport" onClick={() => navigate("/")}>
-            {t("dashboard")}
+            {t("Sensor_Dashboard")}
           </li>
           <li className="navbar-itemreport" onClick={() => navigate("/report")}>
-            {t("reports")}
+            {t("Sensor_Reports")}
           </li>
           <li className="navbar-itemreport" onClick={() => navigate("/airecommendation")}>
-            {t("ai")}
+            {t("Crop_Recommendations")}
           </li>
           {/* <li className="navbar-itemreport" onClick={() => navigate("/leaf-detector")}>
             {t("leafDetector")}
@@ -280,7 +280,7 @@ const AiRecommendation = ({ onLogout }) => {
         </div>
       )}
 
-      <h2 className="page-titleai">{t("aiRecommendationTitle") || "🤖 AI Crop Recommendations"}</h2>
+      <h2 className="page-titleai">{ "Crop Recommendations"}</h2>
 
       {/* 🧩 Sensor Data Display */}
       <div className="sensor-dataai" style={{ background: darkMode ? '#2a2a2a' : '#e8f5e9', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
@@ -336,7 +336,7 @@ const AiRecommendation = ({ onLogout }) => {
       )}
 
       {/* Database Info */}
-      {cropData.length > 0 && (
+      {/* {cropData.length > 0 && (
         <div style={{ 
           marginTop: "30px", 
           padding: "15px", 
@@ -347,7 +347,7 @@ const AiRecommendation = ({ onLogout }) => {
         }}>
           <strong>ℹ️ Database Status:</strong> Successfully loaded {cropData.length} crop(s) from Firebase
         </div>
-      )}
+      )} */}
     </div>
   );
 };
